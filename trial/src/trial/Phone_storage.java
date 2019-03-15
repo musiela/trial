@@ -9,18 +9,16 @@ public class Phone_storage {
 	static boolean oper = true;
 	static HashMap<String, Double> values = new HashMap<String, Double>();
 	public static void main(String[] args) {
-		
-		try{
-		   while(oper){
-			System.out.println("please insert the name of operator");
-			Scanner scan = new Scanner(System.in);
-			String operator = scan.nextLine(); 
-			if (operator != null && !operator.isEmpty()) {
-				func(operator);
-				
-			    }
+	       try{
+		  while(oper){
+		     System.out.println("please insert the name of operator");
+		     Scanner scan = new Scanner(System.in);
+		     String operator = scan.nextLine(); 
+		     if (operator != null && !operator.isEmpty()) {
+			func(operator);
+		     }
 				 
-		     System.out.println("type 'yes' if you want to add another operator, else type 'no'.");
+		     //System.out.println("type 'yes' if you want to add another operator, else type 'no'.");
 		     String another = scan.nextLine();
 		     if(another.equalsIgnoreCase("no")){
 		    	oper = false;
@@ -40,27 +38,27 @@ public class Phone_storage {
 		int prefix_length = 0;
 		Integer longest_prefix = 0;
 		for (Entry<String, HashMap<Integer, Double>> entry : hm.entrySet()) {
-			operator1 = entry.getKey();
-	        System.out.println("name of operator::" + entry.getKey());
-		    System.out.println("price lists in this operator:::" +entry.getValue());
-	        for (Entry<Integer, Double> prefixes : entry.getValue().entrySet()) { 
-                prefix = Integer.toString(prefixes.getKey());
-                if((phoneno.startsWith(prefix)) && (prefix.length() > prefix_length)){
-                	prefix_length = prefix.length();
-                	longest_prefix = Integer.parseInt(prefix);
-                }
-                //System.out.println("phone prefix ::"+ prefixes.getKey());
-		        }
+		     operator1 = entry.getKey();
+	             System.out.println("name of operator::" + entry.getKey());
+		     System.out.println("price lists in this operator:::" +entry.getValue());
+	             for (Entry<Integer, Double> prefixes : entry.getValue().entrySet()) { 
+                        prefix = Integer.toString(prefixes.getKey());
+                        if((phoneno.startsWith(prefix)) && (prefix.length() > prefix_length)){
+                	  prefix_length = prefix.length();
+                	  longest_prefix = Integer.parseInt(prefix);
+                         }
+                       //System.out.println("phone prefix ::"+ prefixes.getKey());
+		      }
 		        Double price = hm.get(operator1).get(longest_prefix);
 		        values.put(operator1, price);
 		    }
 		
-		Entry<String, Double> min = null;
-		for (Entry<String, Double> entry : values.entrySet()) {
+		 Entry<String, Double> min = null;
+		 for (Entry<String, Double> entry : values.entrySet()) {
 		    if (min == null || min.getValue() > entry.getValue()) {
 		        min = entry;
 		    }
-		}
+		 }
 		System.out.println("Operator " + min.getKey() + "has the minimum price of " + min.getValue() + "cents");
 		
 	   } catch (Exception e) {
